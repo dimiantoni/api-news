@@ -13,15 +13,15 @@ Como não foi possível eu tirar dúvidas ao longo do período que estive desenv
 
 - Recurso para retornar lista de News com limite de 10 resultados e número de páginas disposíveis exemplo: 
 
-[localhost:8000/api/news](localhost:8000/api/news).
+[localhost:8000/api/news](http://localhost:8000/api/news).
 
 - Recurso de News por página onde é possível informar o número da página que deseja requisitar exemplo: 
 
-[localhost:8000/api/news/page/1](localhost:8000/api/news/page/1).
+[localhost:8000/api/news/page/1](http://localhost:8000/api/news/page/1).
 
 - Recurso para retornar uma news por seu id interno fornecido nos atributos quando listado exemplo: 
 
-[localhost:8000/api/news/1](localhost:8000/api/news).
+[localhost:8000/api/news/1](http://localhost:8000/api/news).
 
 O certo seria fazer o news receber um post com o pageId para a páginação server side mas para simplificar o teste separei em outro endpoint com acesso get simples via rota, optei por não fazer uso de banco de dados por se tratar de uma consulta em uma fonte de dados de terceiros, o custo para aplicação trazer os dados para uma database interna nesse cenário é muito alta e faz pouco sentido, a minha estratégia foi implementar as ordenações e paginações direto no serviço implementado para fazer a busca e realizar um cache desses dados com uma expiração de 15 minutos só para fins de teste.
 
@@ -47,19 +47,17 @@ composer install
 
 php artisan serve
 ```
-
 Após o comando o laravel irá iniciar o servidor apache integrado do PHP na porta 8000 abra o navegador e acesse para ver a página inicial com a documentação:
 
 http://localhost:8000/
 
-
 Siga as orientações da documentação para testar a API, recomento importar a collection das requisições de teste no postman importando o arquivo meu-cambio.postman_collection.json que se encontra na pasta public/docs conforme já mencionado acima.
-
 
 
 ## Contato e feedbacks
 
 Qualquer dúvida ou sugestão pode entrar em contato no meu email pessoal via [antonivargas@gmail.com](mailto:antonivargas@gmail.com). Qualquer feedback em relação ao material produzido para este teste será muito bem vindo, ficaria mesmo muito grato pois servirá para eu continuar buscando evoluir minhas aptidões técnicas e crescimento profissional.
+
 
 ## API Documentation
 
