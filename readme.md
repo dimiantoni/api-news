@@ -11,10 +11,12 @@
 
 We A instalação ficou o mais simples possível basta clonar o repositório em um ambiente linux ou windows com todas as dependências necessárias para o Laravel 5.7 realizar os 3 passos abaixo e aplicação estará rodando. Qualquer dúvida basta consultr a seção #Instalation  - Server Requirements na [Documentação oficial do Laravel](https://laravel.com/docs/5.7/installation):
 
-1. git clone https://github.com/dimiantoni/flexy-teste-tecnico.git api-news
+1. git clone https://github.com/dimiantoni/api-news.git api-news
 2. cd api-news
 3. composer install
-4. php artisan serve
+4. cp .env.example .env
+5. php artisan key:generate
+6. php artisan serve
 
 Após o comando o laravel irá iniciar o servidor apache integrado do PHP na porta 8000 abra o navegador e acesse para ver a página inicial com a documentação:
 
