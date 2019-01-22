@@ -11,9 +11,17 @@
 
 Como não foi possível eu tirar dúvidas ao longo do período que estive desenvolvendo, por que fiz ao longo do fim de semana e ontem a noite escrevi alguns testes, eu identifiquei que apenas através dos dois endpoints e métodos sugeridos no escopo do teste não seria possível atender o requisito de páginação. Então implementei a API com 3 recursos que foram os seguintes:
 
-- Recurso para retornar lista de News com limite de 10 resultados e número de páginas disposíveis exemplo: [localhost:8000/api/news](localhost:8000/api/news).
-- Recurso de News por página onde é possível informar o número da página que deseja requisitar exemplo: [localhost:8000/api/news/page/1](localhost:8000/api/news/page/1).
-- Recurso para retornar uma news por seu id interno fornecido nos atributos quando listado exemplo: [localhost:8000/api/news/1](localhost:8000/api/news).
+- Recurso para retornar lista de News com limite de 10 resultados e número de páginas disposíveis exemplo: 
+
+[localhost:8000/api/news](localhost:8000/api/news).
+
+- Recurso de News por página onde é possível informar o número da página que deseja requisitar exemplo: 
+
+[localhost:8000/api/news/page/1](localhost:8000/api/news/page/1).
+
+- Recurso para retornar uma news por seu id interno fornecido nos atributos quando listado exemplo: 
+
+[localhost:8000/api/news/1](localhost:8000/api/news).
 
 O certo seria fazer o news receber um post com o pageId para a páginação server side mas para simplificar o teste separei em outro endpoint com acesso get simples via rota, optei por não fazer uso de banco de dados por se tratar de uma consulta em uma fonte de dados de terceiros, o custo para aplicação trazer os dados para uma database interna nesse cenário é muito alta e faz pouco sentido, a minha estratégia foi implementar as ordenações e paginações direto no serviço implementado para fazer a busca e realizar um cache desses dados com uma expiração de 15 minutos só para fins de teste.
 
