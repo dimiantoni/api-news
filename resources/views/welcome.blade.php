@@ -18,7 +18,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width">
 
-  <title>Your Project</title>
+  <title>API Notícias</title>
 
   <!-- Flatdoc -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -30,14 +30,13 @@
   <script src='https://cdn.rawgit.com/rstacruz/flatdoc/v0.9.0/theme-white/script.js'></script>
 
   <!-- Meta -->
-  <meta content="Your Project" property="og:title">
-  <meta content="Your Project description goes here." name="description">
+  <meta content="API Notícias" property="og:title">
+  <meta content="API Notícias description goes here." name="description">
 
   <!-- Initializer -->
   <script>
     Flatdoc.run({
-      //fetcher: Flatdoc.github('dimiantoni/teste-tecnico')
-      fetcher: Flatdoc.file('{{ asset('docs/') }}Readme.md')
+      fetcher: Flatdoc.github('dimiantoni/api-news')
     });
   </script>
 </head>
@@ -53,7 +52,7 @@
     </div>
     <div class='right'>
       <!-- GitHub buttons: see http://ghbtns.com -->
-      <iframe src="http://ghbtns.com/github-btn.html?user=dimiantoni&amp;repo=flexy-teste-tecnico&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+      <iframe src="http://ghbtns.com/github-btn.html?user=dimiantoni&amp;repo=api-news&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
     </div>
   </div>
 
