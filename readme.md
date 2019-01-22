@@ -40,13 +40,9 @@ We A instalação ficou o mais simples possível basta clonar o repositório em 
 
 1. git clone https://github.com/dimiantoni/flexy-teste-tecnico.git api-news
 2. cd api-news
+3. composer install
+4. php artisan serve
 
-
-```php
-composer install
-
-php artisan serve
-```
 Após o comando o laravel irá iniciar o servidor apache integrado do PHP na porta 8000 abra o navegador e acesse para ver a página inicial com a documentação:
 
 http://localhost:8000/
