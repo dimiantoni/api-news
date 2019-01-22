@@ -1,0 +1,96 @@
+{
+	"info": {
+		"_postman_id": "e7f78d81-31cb-468d-aa44-0480e82d90cb",
+		"name": "Meu Câmbio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "News",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/news",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"news"
+					]
+				},
+				"description": "Get List News"
+			},
+			"response": []
+		},
+		{
+			"name": "Get News By Page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/news/page/4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"news",
+						"page",
+						"4"
+					]
+				},
+				"description": "Get News By Page"
+			},
+			"response": []
+		},
+		{
+			"name": "Get News By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/news/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"news",
+						"3"
+					]
+				},
+				"description": "Get News By Id"
+			},
+			"response": []
+		}
+	]
+}

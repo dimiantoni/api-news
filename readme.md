@@ -15,7 +15,10 @@ Como não foi possível eu tirar dúvidas ao longo do período que estive desenv
 - Recurso de News por página onde é possível informar o número da página que deseja requisitar exemplo: [localhost:8000/api/news/page/1](localhost:8000/api/news/page/1).
 - Recurso para retornar uma news por seu id interno fornecido nos atributos quando listado exemplo: [localhost:8000/api/news/1](localhost:8000/api/news).
 
-Optei por não fazer uso de banco de dados por se tratar de uma consulta em uma fonte de dados de terceiros, o custo para aplicação trazer os dados para uma database interna nesse cenário é muito alta e faz pouco sentido, a minha estratégia foi implementar as ordenações e paginações direto no serviço implementado para fazer a busca e realizar um cache desses dados com uma expiração de 15 minutos só para fins de teste.
+O certo seria fazer o news receber um post com o pageId para a páginação server side mas para simplificar o teste separei em outro endpoint com acesso get simples via rota, optei por não fazer uso de banco de dados por se tratar de uma consulta em uma fonte de dados de terceiros, o custo para aplicação trazer os dados para uma database interna nesse cenário é muito alta e faz pouco sentido, a minha estratégia foi implementar as ordenações e paginações direto no serviço implementado para fazer a busca e realizar um cache desses dados com uma expiração de 15 minutos só para fins de teste.
+
+Na pasta public/docs há um json com uma collection para importar no postman e testar as
+requisições de teste que usei para testar a API.
 
 ## Arquitetura
 
@@ -23,38 +26,28 @@ Eu busquei isolar toda a lógica em uma camada de regras de negócios, tentando 
 
 Para isso criei uma classe de domain denominada FeedService que é injetada no controller para prover os métodos relacionados com as regras de negócio da aplicação, claro que cabe um refactor sempre para buscar um isolamento melhor das responsabilidades mas busquei deixar os métodos o mais atômicos e reutilizáveis possível. Tem uma pequena gambiarra usando o encode e decode do objeto gerado pela classe SimpleXMLElement(), mas se trata de um arranjo técnico para não precisar deserializar o objeto para usar o store default do cache que é o sistema de arquivos porque teria que reverter o processo no recuperar o dado, nesse cenário se costuma usar o redis como store com a library pre/redis para fazer o trabalho de serializar e deserializar os arrays e objetos para o store, mas por com uma questão de não agregar complexidade no setup preferi deixar o store padrão usando o driver file. 
 
-## Laravel Sponsors
+## Rodando a aplicação Laravel
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+We A instalação ficou o mais simples possível basta clonar o repositório em um ambiente linux ou windows com todas as dependências necessárias para o Laravel 5.7 realizar os 3 passos abaixo e aplicação estará rodando. Qualquer dúvida basta consultr a seção #Instalation  - Server Requirements na [Documentação oficial do Laravel](https://laravel.com/docs/5.7/installation):
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
+1. git clone https://github.com/dimiantoni/flexy-teste-tecnico.git api-news
+2. cd api-news
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```php
+composer install
+
+php artisan serve
+```
+
+Após o comando o laravel irá iniciar o servidor apache integrado do PHP na porta 8000 abra o navegador e acesse para ver a página inicial com a documentação:
+
+http://localhost:8000/
+
+
+Siga as orientações da documentação para testar a API, recomento importar a collection das requisições de teste no postman importando o arquivo meu-cambio.postman_collection.json que se encontra na pasta public/docs conforme já mencionado acima.
+
+
 
 ## Contato e feedbacks
 
