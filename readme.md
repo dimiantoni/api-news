@@ -24,6 +24,9 @@ http://localhost:8000/
 
 Siga as orientações da documentação para testar a API, recomento importar a collection das requisições de teste no postman importando o arquivo meu-cambio.postman_collection.json que se encontra na pasta public/docs.
 
+Para rodar os testes automatizados:
+1. vendor/bin/phpunit
+
 ## Explain
 
 Como não foi possível eu tirar dúvidas ao longo do período que estive desenvolvendo, por que fiz ao longo do fim de semana e ontem a noite escrevi alguns testes, eu identifiquei que apenas através dos dois endpoints e métodos sugeridos no escopo do teste não seria possível atender o requisito de páginação. Então implementei a API com 3 recursos que foram os seguintes:
