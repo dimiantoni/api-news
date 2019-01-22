@@ -9,23 +9,19 @@
 
 ## Explain
 
-Como não foi possível eu tirar dúvidas ao longo do período que estive desenvolvendo, por que fiz ao longo do fim de semana e ontem a noite escrevi alguns testes, eu identifiquei que apenas através dos dois endpoints e métodos sugeridos no escopo do teste não seria possível atender o requisito de páginação. is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+Como não foi possível eu tirar dúvidas ao longo do período que estive desenvolvendo, por que fiz ao longo do fim de semana e ontem a noite escrevi alguns testes, eu identifiquei que apenas através dos dois endpoints e métodos sugeridos no escopo do teste não seria possível atender o requisito de páginação. Então implementei a API com 3 recursos que foram os seguintes:
 
-- [News](https://laravel.com/docs/routing).
-- [News by Page](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Recurso para retornar lista de News com limite de 10 resultados e número de páginas disposíveis exemplo: [localhost:8000/api/news](localhost:8000/api/news).
+- Recurso de News por página onde é possível informar o número da página que deseja requisitar exemplo: [localhost:8000/api/news/page/1](localhost:8000/api/news/page/1).
+- Recurso para retornar uma news por seu id interno fornecido nos atributos quando listado exemplo: [localhost:8000/api/news/1](localhost:8000/api/news).
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+Optei por não fazer uso de banco de dados por se tratar de uma consulta em uma fonte de dados de terceiros, o custo para aplicação trazer os dados para uma database interna nesse cenário é muito alta e faz pouco sentido, a minha estratégia foi implementar as ordenações e paginações direto no serviço implementado para fazer a busca e realizar um cache desses dados com uma expiração de 15 minutos só para fins de teste.
 
-## Learning Laravel
+## Arquitetura
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+Eu busquei isolar toda a lógica em uma camada de regras de negócios, tentando deixar o controller do laravel responsável apenas por tratar a requisição, conforme se recomenda nas melhores práticas de aplicação do padrão MVC de arquitetura.
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+Para isso criei uma classe de domain denominada FeedService que é injetada no controller para prover os métodos relacionados com as regras de negócio da aplicação, claro que cabe um refactor sempre para buscar um isolamento melhor das responsabilidades mas busquei deixar os métodos o mais atômicos e reutilizáveis possível. Tem uma pequena gambiarra usando o encode e decode do objeto gerado pela classe SimpleXMLElement(), mas se trata de um arranjo técnico para não precisar deserializar o objeto para usar o store default do cache que é o sistema de arquivos porque teria que reverter o processo no recuperar o dado, nesse cenário se costuma usar o redis como store com a library pre/redis para fazer o trabalho de serializar e deserializar os arrays e objetos para o store, mas por com uma questão de não agregar complexidade no setup preferi deixar o store padrão usando o driver file. 
 
 ## Laravel Sponsors
 
@@ -60,7 +56,7 @@ We would like to extend our thanks to the following sponsors for helping fund on
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Security Vulnerabilities
+## Contato e feedbacks
 
 Qualquer dúvida ou sugestão pode entrar em contato no meu email pessoal via [antonivargas@gmail.com](mailto:antonivargas@gmail.com). Qualquer feedback em relação ao material produzido para este teste será muito bem vindo, ficaria mesmo muito grato pois servirá para eu continuar buscando evoluir minhas aptidões técnicas e crescimento profissional.
 

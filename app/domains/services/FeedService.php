@@ -20,10 +20,12 @@ class FeedService
 
     		$articlesFeed = Cache::get('articles'); 
     		$articlesOrderByPage = Cache::get('articles_by_pages');
+    		$this->numberOfPages = Cache::get('number_of_pages');
     		
 		    return [
-				'articles' => Cache::get('articles'), 
-				'articles_by_pages' => Cache::get('articles_by_pages')
+				'articles' => $articlesFeed, 
+				'articles_by_pages' => $articlesOrderByPage,
+				'number_of_pages' => $this->numberOfPages
 			];
 		}
 
@@ -33,6 +35,8 @@ class FeedService
 		$articlesOrderByPage = $newsFeed['articles_by_pages'];
 
 		return [
+			
+			'number_of_pages' => $this->makeCacheFeed('number_of_pages', $this->numberOfPages),
 
 			'articles' => $this->makeCacheFeed(
 				'articles',$articlesFeed
@@ -40,7 +44,7 @@ class FeedService
 
 			'articles_by_pages' => $this->makeCacheFeed(
 				'articles_by_pages',$articlesOrderByPage
-			),
+			)
 		];
     }
 
@@ -78,13 +82,20 @@ class FeedService
 		];
     }
 
-    public function getAllArticles()
+    /**
+     * Retorna array de objetos com os 10 primeiros artigos
+     * @return [array] $response
+     */
+    public function getAllArticlesFirstPage()
     {
+    	$response = [];
     	$this->listFeed = $this->getNewsFeed();
     	if(!isset($this->listFeed['articles'])){
     		abort(403, 'not found news.');
     	}
-    	return $this->listFeed['articles'];	
+    	$response['articles'] = array_slice($this->listFeed['articles'], 0, 10);
+    	$response['number_of_pages'] = $this->listFeed['number_of_pages'];
+    	return $response;	
     }
 
     public function getArticleById($id)
@@ -96,6 +107,10 @@ class FeedService
 		return $this->listFeed['articles'][$id];
     }
 
+    /**
+     * @param  [int] $pageId
+     * @return [array]
+     */
     public function getArticlesByPageId($pageId)
     {
     	$this->listFeed = $this->getNewsFeed();
@@ -105,6 +120,12 @@ class FeedService
     	return $this->listFeed['articles_by_pages']->pages->$pageId;
     }
 
+    /**
+     * Cria cache do dado pelo key/value definido no parâmetro
+     * @param  [string] $listNameCache
+     * @param  [array] $listName
+     * @return [array]
+     */
     public function makeCacheFeed($listNameCache, $listName)
     {
     	$expiresAt = now()->addMinutes(15);

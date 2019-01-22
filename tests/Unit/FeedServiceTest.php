@@ -44,8 +44,10 @@ class FeedServiceTest extends TestCase
     {
     	$service = new FeedService();
     	$response = $service->getNewsFeed();
-    	$articles = $service->getAllArticles();
-    	$this->assertEquals($articles, $response['articles']);
+    	$articles = $service->getAllArticlesFirstPage();
+    	$this->assertEquals(
+    		$articles['articles'], array_slice($response['articles'], 0,10)
+    	);
     }
 
     /**
