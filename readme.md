@@ -9,7 +9,7 @@
 
 ## Rodando a aplicação Laravel
 
-We A instalação ficou o mais simples possível basta clonar o repositório em um ambiente linux ou windows com todas as dependências necessárias para o Laravel 5.7 realizar os 3 passos abaixo e aplicação estará rodando. Qualquer dúvida basta consultr a seção #Instalation  - Server Requirements na [Documentação oficial do Laravel](https://laravel.com/docs/5.7/installation):
+A instalação ficou o mais simples possível basta clonar o repositório em um ambiente linux ou windows com todas as dependências necessárias para o Laravel 5.7 realizar os 3 passos abaixo e aplicação estará rodando. Qualquer dúvida basta consultr a seção #Instalation  - Server Requirements na [Documentação oficial do Laravel](https://laravel.com/docs/5.7/installation):
 
 1. git clone https://github.com/dimiantoni/api-news.git api-news
 2. cd api-news
